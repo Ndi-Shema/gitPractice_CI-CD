@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "Dianah",
     "pelin",
+    "todo"
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = 'home'  # This will redirect the user to the home page after login
+LOGIN_URL = '/login/'  # Direct users to /login/ instead of /accounts/login/

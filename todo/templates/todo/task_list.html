@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Task List</h2>
+        <a href="{% url 'add_task' %}" class="btn btn-primary mb-3">Add Task</a>
+        <div class="list-group">
+            {% for task in tasks %}
+                <div class="list-group-item">
+                    <h5>{{ task.title }}</h5>
+                    <p>{{ task.category }}</p>
+                    <p>Completed: {% if task.completed %}Yes{% else %}No{% endif %}</p>
+                    <a href="{% url 'update_task' task.id %}" class="btn btn-warning">Toggle Completion</a>
+                </div>
+            {% empty %}
+                <p>No tasks available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
