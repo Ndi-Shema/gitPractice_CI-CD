@@ -1,23 +1,20 @@
-FROM python:3.12-slim
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim
 
-# upgrade pip
-RUN pip install --upgrade pip
-
-# mkdir /app && cd /app
+# Set the working directory in the container
 WORKDIR /app
 
-# copy requirements.txt to /app
-COPY ./requirements.txt .
+# Copy requirements.txt into the container
+COPY requirements.txt .
 
-# install requirements
-RUN pip install -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copying the project files to the /app directory
+# Copy the current directory contents into the container
 COPY . .
 
+# Expose the application port
 EXPOSE 8000
 
-# Running the server
-#CMD ["gunicorn", "gitpractice.wsgi:application", "--bind 0.0.0.0:8000"]
-COPY ./entrypoint.sh /
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+# Command to run the application
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "gitpractice.wsgi:application"]
